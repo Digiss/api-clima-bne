@@ -21,18 +21,19 @@
     background: linear-gradient(black, grey);
         }
         #map {
-            left: 170px;
+            z-index: 1;
             height: 696px;
-            width: 1225px;
+            width: 100%;
             position: relative;
         }
         
         #botaoFS {
+            z-index: 1000;
             position: fixed;
             bottom: 7px;
-            right: 1209px;
+            left: 7px;
             padding: 10px;
-            background-color: #DDDDDD;
+            background-color: transparent;
             border: none;
             cursor: pointer;
             display: flex;
@@ -70,6 +71,7 @@
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
     position: fixed;
     left: 13px;
+    z-index: 800;
     
 }
 
@@ -207,13 +209,13 @@
 
     <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
     <script>
-        var map = L.map('map').setView([0, 0], 1);
+        var map = L.map('map').setView([0, 0], 3);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
+            minZoom : 3,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
 
-        L.Control.geocoder().addTo(map);
 
         const imagemFS = document.getElementById('imagemFS');
 
@@ -221,12 +223,9 @@
             if (!document.fullscreenElement) {
                 document.getElementById('map').requestFullscreen();
                 imagemFS.src = "imagens/pingadegraca.png";
-                botaoFS.style.right = "1470px";
             } else {
                 document.exitFullscreen();
                 imagemFS.src = "imagens/botaofullsecreen.png";
-                botaoFS.style.right = "1209px";
-                botaoFS.style.bottom = "8px";
             }
         }
 

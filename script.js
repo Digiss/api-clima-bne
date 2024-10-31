@@ -3,13 +3,16 @@ document.querySelector('#search').addEventListener('submit', async (event) => {
 
     const cityName = document.querySelector('#city_name').value;
 
+    
+    
+
     if (!cityName) {
         document.querySelector("#weather").classList.remove('show');
-        showAlert('Você precisa digitar uma cidade...');
+        showAlert('Digite uma cidade');
         return;
     }
-
     const apiKey = '280d0f22003a0540a8d84d83e024e343';
+
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(cityName)}&appid=${apiKey}&units=metric&lang=pt_br`
 
     const results = await fetch(apiUrl);
@@ -26,6 +29,7 @@ document.querySelector('#search').addEventListener('submit', async (event) => {
             tempIcon: json.weather[0].icon,
             windSpeed: json.wind.speed,
             humidity: json.main.humidity,
+            coord : json.coord
         });
     } else {
         document.querySelector("#weather").classList.remove('show');
@@ -39,10 +43,15 @@ document.querySelector('#search').addEventListener('submit', async (event) => {
 
 function showInfo(json){
     showAlert('');
-
+    
     document.querySelector("#weather").classList.add('show');
 
     document.querySelector('#title').innerHTML = `${json.city}, ${json.country}`;
+    L.marker([json.coord.lat, json.coord.lon]).addTo(map)
+    .bindPopup(json.city + ", " + json.country)
+    .openPopup();
+    map.setView([json.coord.lat, json.coord.lon], 8)
+ 
 
     document.querySelector('#temp_value').innerHTML = `${json.temp.toFixed(1).toString().replace('.', ',')} <sup>C°</sup>`;
     document.querySelector('#temp_description').innerHTML = `${json.description}`;
@@ -52,6 +61,7 @@ function showInfo(json){
     document.querySelector('#temp_min').innerHTML = `${json.tempMin.toFixed(1).toString().replace('.', ',')} <sup>C°</sup>`;
     document.querySelector('#humidity').innerHTML = `${json.humidity}%`;
     document.querySelector('#wind').innerHTML = `${json.windSpeed.toFixed(1)}km/h`;
+    
 }
 
 function showAlert(msg) {
