@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <script src="https://kit.fontawesome.com/1433533204.js" crossorigin="anonymous"></script>
     <title>WeatherNOW</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -20,16 +21,16 @@
     background: linear-gradient(black, grey);
         }
         #map {
-            left: 150px;
+            left: 170px;
             height: 696px;
-            width: 1200px;
+            width: 1225px;
             position: relative;
         }
         
         #botaoFS {
             position: fixed;
             bottom: 7px;
-            right: 1170px;
+            right: 1209px;
             padding: 10px;
             background-color: #DDDDDD;
             border: none;
@@ -68,7 +69,7 @@
     padding: 18px;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
     position: fixed;
-    left: 0px;
+    left: 13px;
     
 }
 
@@ -224,8 +225,8 @@
             } else {
                 document.exitFullscreen();
                 imagemFS.src = "imagens/botaofullsecreen.png";
-                botaoFS.style.right = "1170px";
-                botaoFS.style.bottom = "8px"
+                botaoFS.style.right = "1209px";
+                botaoFS.style.bottom = "8px";
             }
         }
 
@@ -243,10 +244,10 @@
     <div id="container">
         <form id="search">
             <i class="fa-solid fa-map-pin"></i>
-            <input type="search" name="city_name" id="city_name" placeholder="Buscar cidade/estado/país">
+            <input type="search" name="city_name" id="city_name" placeholder="Buscar cidade">
             <button><i class="fa-solid fa-location-arrow"></i></button>
         </form>
-        <div id="weather" class="show">
+        <div id="weather">
             <h1 id="title">Curitiba, BR</h1>
             <div id="infos">
                     <div id="temp">
@@ -280,7 +281,7 @@
                             </div>
                         </div>
                         <div class="info">
-                            <i id="humidity_icon" class="fa-solid fa-doplet"></i>
+                            <i id="humidity_icon" class="fa-solid fa-droplet"></i>
                             <div>
                                 <h2>Humidade</h2>
                                 <p id="humidity">
@@ -303,8 +304,7 @@
 
         <div id="alert"></div>
     </div>
-    <script src="src/script.js">
-        
+    <script src="script.js">
     </script>
 </body>
 </html>
